@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
@@ -15,6 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool mode = false;
   List data;
+  Color color = Colors.white;
 
   Future<String> LoadJsonData() async {
     var jsontext = await rootBundle.loadString('asset/continents.json');
@@ -37,10 +37,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: color,
       appBar: AppBar(
         title: Text(
           'world',
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          style: GoogleFonts.ubuntu(
+              textStyle:
+                  TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
         ),
         centerTitle: true,
         backgroundColor: Colors.teal,
@@ -60,13 +63,6 @@ class _HomeState extends State<Home> {
                     var NorthAmerica = data[index]["NA"];
                     var Oceania = data[index]["OC"];
                     var SouthAmerica = data[index]["SA"];
-                    print(Africa);
-                    print(Antarctic);
-                    print(Asia);
-                    print(Europe);
-                    print(NorthAmerica);
-                    print(Oceania);
-                    print(SouthAmerica);
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,12 +108,19 @@ class _HomeState extends State<Home> {
                   ],
                 )),
             ListTile(
-              title: Text('Dark Mode'),
+              title: Text(
+                'Dark Mode',
+              ),
               leading: Switch(
                 value: mode,
                 onChanged: (value) {
                   setState(() {
                     mode = value;
+                    if (mode) {
+                      color = Colors.black;
+                    } else {
+                      color = Colors.white;
+                    }
                   });
                 },
                 activeTrackColor: Colors.greenAccent,
@@ -134,8 +137,10 @@ class _HomeState extends State<Home> {
 Widget model(String s, String m, context) {
   return InkWell(
     onTap: () {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Detail()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Detail(
+                text: s,
+              )));
     },
     child: Card(
       elevation: 10.0,
