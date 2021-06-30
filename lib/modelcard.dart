@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world/pages/countrydetail.dart';
+import 'package:world/pages/favorite.dart';
 
 class modelcard extends StatefulWidget {
   final String text, text1;
@@ -13,6 +14,7 @@ class modelcard extends StatefulWidget {
 class _modelcardState extends State<modelcard> {
   bool chackfavor = false;
   bool load = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(

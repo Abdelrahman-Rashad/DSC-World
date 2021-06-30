@@ -18,9 +18,7 @@ class _FavoriteState extends State<Favorite> {
         backgroundColor: Colors.teal,
       ),
       body: Center(
-        child: Column(
-          children: [],
-        ),
+        child: Column(),
       ),
     );
   }
